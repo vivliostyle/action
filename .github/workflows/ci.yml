@@ -10,4 +10,4 @@ jobs:
       - name: Run Vivliostyle action
         uses: ./
         with:
-          input: https://vivliostyle.github.io/vivliostyle_doc/samples/gon/index.html
+          input: fixtures/wood/index.html

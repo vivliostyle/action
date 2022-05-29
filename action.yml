@@ -3,13 +3,20 @@ description: A GitHub action to automate publication builds with Vivliostyle
 
 inputs:
   input:
-    description: An input file or location for Vivliostyle CLI
+    description: An input file or location of Vivliostyle config file
     required: true
     default: '.'
   vivliostyle-version:
     description: A docker image tag of Vivliostyle CLI
     required: true
     default: feat-use-playwright
+  artifact-name:
+    description: Artifact name to upload built files
+    required: true
+    default: vivliostyle-artifact
+outputs:
+  upload:
+    description: Information of artifact data
 runs:
   using: node16
   pre: lib/setup/index.js
