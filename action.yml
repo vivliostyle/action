@@ -11,11 +11,6 @@ inputs:
     required: true
     default: feat-use-playwright
 runs:
-  using: composite
-  steps:
-    - shell: bash
-      run: |
-        set -e
-        docker run --rm -e DEBUG=vs-cli \
-          ghcr.io/vivliostyle/cli:${{ inputs.vivliostyle-version }} \
-          build ${{ inputs.input }}
+  using: node16
+  pre: lib/setup/index.js
+  main: lib/main/index.js

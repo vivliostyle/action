@@ -1,0 +1,31 @@
+{
+  "name": "@vivliostyle/action",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A GitHub action to automate publication builds with Vivliostyle",
+  "author": "spring_raining <harusamex.com@gmail.com>",
+  "main": "lib/main/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "ncc build src/main.ts -o lib/main --external @vivliostyle/cli --source-map && ncc build src/setup.ts -o lib/setup --source-map",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vivliostyle/action.git"
+  },
+  "keywords": [
+    "vivliostyle",
+    "actions"
+  ],
+  "license": "AGPL-3.0",
+  "devDependencies": {
+    "@actions/core": "^1.8.2",
+    "@actions/exec": "^1.1.1",
+    "@actions/tool-cache": "^2.0.1",
+    "@tsconfig/node16": "^1.0.2",
+    "@vercel/ncc": "^0.34.0",
+    "@vivliostyle/cli": "4",
+    "typescript": "^4.7.2"
+  }
+}
