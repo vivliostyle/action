@@ -1,0 +1,13 @@
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Run Vivliostyle action
+        uses: ./
+        with:
+          input: https://vivliostyle.github.io/vivliostyle_doc/samples/gon/index.html

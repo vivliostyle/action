@@ -1,0 +1,16 @@
+name: Vivliostyle
+description: A GitHub action to automate publication builds with Vivliostyle
+
+inputs:
+  input:
+    description: An input file or location for Vivliostyle CLI
+    required: true
+    default: '.'
+runs:
+  using: docker
+  image: docker://ghcr.io/vivliostyle/cli:feat-use-playwright
+  env:
+    DEBUG: vs-cli
+  args:
+    - build
+    - ${{ inputs.input }}
