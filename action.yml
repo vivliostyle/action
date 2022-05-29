@@ -6,11 +6,16 @@ inputs:
     description: An input file or location for Vivliostyle CLI
     required: true
     default: '.'
+  vivliostyle-version:
+    description: A docker image tag of Vivliostyle CLI
+    required: true
+    default: feat-use-playwright
 runs:
-  using: docker
-  image: docker://ghcr.io/vivliostyle/cli:feat-use-playwright
-  env:
-    DEBUG: vs-cli
-  args:
-    - build
-    - ${{ inputs.input }}
+  using: composite
+  steps:
+    - shell: bash
+      run: |
+        set -e
+        docker run --rm -e DEBUG=vs-cli \
+          ghcr.io/vivliostyle/cli:${{ inputs.vivliostyle-version }} \
+          build ${{ inputs.input }}
