@@ -3,21 +3,46 @@ description: A GitHub action to automate publication builds with Vivliostyle
 
 inputs:
   input:
-    description: An input file or location of Vivliostyle config file
-    required: true
+    description: An input file or location of Vivliostyle config file.
     default: '.'
   vivliostyle-version:
-    description: A docker image tag of Vivliostyle CLI
-    required: true
+    description: Using version of Vivliostyle CLI.
     default: feat-use-playwright
   artifact-name:
-    description: Artifact name to upload built files
-    required: true
+    description: Artifact name to upload built files.
     default: vivliostyle-artifact
-outputs:
-  upload:
-    description: Information of artifact data
+  if-no-files-found:
+    description: >
+      The desired behavior if no files are found to upload artifacts.
+      Available Options:
+        warn: Output a warning but do not fail the action
+        error: Fail the action with an error message
+        ignore: Do not output any warnings or errors, the action does not fail
+    default: warn
+  retention-days:
+    description: >
+      Duration after which artifact will expire in days. 0 means using default retention.
+      Minimum 1 day.
+      Maximum 90 days unless changed from the repository settings page.
 runs:
-  using: node16
-  pre: lib/setup/index.js
-  main: lib/main/index.js
+  using: composite
+  steps:
+    - uses: ./.github/actions/prefetch-image
+      with:
+        vivliostyle-version: ${{ inputs.vivliostyle-version }}
+    - shell: bash
+      run: npm i @vivliostyle/cli
+      # run: npm i @vivliostyle/cli@${{ inputs.vivliostyle-version }}
+    - shell: bash
+      run: node $GITHUB_ACTION_PATH/lib/main/index.js
+      id: main
+      env:
+        INPUT_INPUT: ${{ inputs.input }}
+        INPUT_VIVLIOSTYLE-VERSION: ${{ inputs.vivliostyle-version }}
+    - uses: actions/upload-artifact@v3
+      id: upload
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: ${{ steps.main.outputs.artifactPath }}
+        if-no-files-found: ${{ inputs.if-no-files-found }}
+        retention-days: ${{ inputs.retention-days }}

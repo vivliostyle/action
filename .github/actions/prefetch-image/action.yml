@@ -1,0 +1,14 @@
+# Local GitHub action fetching container image on a pre step.
+# This is necessary until composite actions support pre-step runs.
+# https://github.com/actions/runner/issues/1478
+name: Vivliostyle prefetch-image
+description: prefetch-image
+
+inputs:
+  vivliostyle-version:
+    description: A docker image tag of Vivliostyle CLI
+    required: true
+runs:
+  using: node16
+  pre: lib/setup/index.js
+  main: index.js

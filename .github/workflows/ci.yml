@@ -2,12 +2,21 @@ on:
   - push
 
 jobs:
-  test:
+  run-vivliostyle:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Run Vivliostyle action
+      - name: Run Vivliostyle action (wood)
         uses: ./
         with:
           input: fixtures/wood/index.html
+          artifact-name: artifact-wood
+          if-no-files-found: error
+      - name: Run Vivliostyle action (markdown)
+        uses: ./
+        with:
+          input: fixtures/markdown/vivliostyle.config.js
+          artifact-name: artifact-markdown
+          if-no-files-found: error
+

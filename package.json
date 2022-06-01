@@ -7,7 +7,7 @@
   "main": "lib/main/index.js",
   "type": "module",
   "scripts": {
-    "build": "ncc build src/main.ts -o lib/main --external @vivliostyle/cli --source-map && ncc build src/setup.ts -o lib/setup --source-map",
+    "build": "ncc build src/main.ts -o lib/main --external @vivliostyle/cli --external @vivliostyle/cli/dist/config.js --source-map && ncc build src/setup.ts -o .github/actions/prefetch-image/lib/setup --source-map",
     "watch": "tsc -w"
   },
   "repository": {
@@ -20,10 +20,8 @@
   ],
   "license": "AGPL-3.0",
   "devDependencies": {
-    "@actions/artifact": "^1.1.0",
     "@actions/core": "^1.8.2",
     "@actions/exec": "^1.1.1",
-    "@actions/tool-cache": "^2.0.1",
     "@tsconfig/node16": "^1.0.2",
     "@vercel/ncc": "^0.34.0",
     "@vivliostyle/cli": "4",
