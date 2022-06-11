@@ -7,10 +7,10 @@ inputs:
     default: '.'
   vivliostyle-version:
     description: Using version of Vivliostyle CLI.
-    default: feat-use-playwright
+    default: latest
   artifact-name:
     description: Artifact name to upload built files.
-    default: vivliostyle-artifact
+    default: latest
   if-no-files-found:
     description: >
       The desired behavior if no files are found to upload artifacts.
@@ -31,8 +31,7 @@ runs:
       with:
         vivliostyle-version: ${{ inputs.vivliostyle-version }}
     - shell: bash
-      run: npm i @vivliostyle/cli
-      # run: npm i @vivliostyle/cli@${{ inputs.vivliostyle-version }}
+      run: npm i @vivliostyle/cli@${{ inputs.vivliostyle-version }}
     - shell: bash
       run: node $GITHUB_ACTION_PATH/lib/main/index.js
       id: main
