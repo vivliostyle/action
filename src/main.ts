@@ -1,29 +1,6 @@
-import path from 'path';
 import * as core from '@actions/core';
-import { build, BuildCliFlags } from '@vivliostyle/cli';
-import {
-  collectVivliostyleConfig,
-  mergeConfig,
-  MergedConfig,
-} from '@vivliostyle/cli/dist/config.js';
-
-// TODO: Export this function as official API
-async function getFullConfig(cliFlags: BuildCliFlags): Promise<MergedConfig[]> {
-  const loadedConf = collectVivliostyleConfig(cliFlags);
-  const { vivliostyleConfig, vivliostyleConfigPath } = loadedConf;
-  cliFlags = loadedConf.cliFlags;
-
-  const context = vivliostyleConfig
-    ? path.dirname(vivliostyleConfigPath)
-    : process.cwd();
-
-  const configEntries: MergedConfig[] = [];
-  for (const entry of vivliostyleConfig ?? [vivliostyleConfig]) {
-    const config = await mergeConfig(cliFlags, entry, context);
-    configEntries.push(config);
-  }
-  return configEntries;
-}
+import { build } from '@vivliostyle/cli';
+import { getFullConfig } from '@vivliostyle/cli/dist/build.js';
 
 async function run() {
   const input = core.getInput('input');
