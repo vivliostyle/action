@@ -4,7 +4,7 @@ import { getFullConfig } from '@vivliostyle/cli/dist/build.js';
 
 async function run() {
   const input = core.getInput('input');
-  const version = core.getInput('vivliostyle-version');
+  const version = core.getInput('cli-version');
   const cliConfig = {
     input,
     // Forcible set docker mode

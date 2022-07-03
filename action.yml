@@ -5,7 +5,7 @@ inputs:
   input:
     description: An input file or location of Vivliostyle config file.
     default: '.'
-  vivliostyle-version:
+  cli-version:
     description: Using version of Vivliostyle CLI.
     default: latest
   artifact-name:
@@ -29,15 +29,15 @@ runs:
   steps:
     - uses: ./.github/actions/prefetch-image
       with:
-        vivliostyle-version: ${{ inputs.vivliostyle-version }}
+        cli-version: ${{ inputs.cli-version }}
     - shell: bash
-      run: npm i @vivliostyle/cli@${{ inputs.vivliostyle-version }}
+      run: npm i @vivliostyle/cli@${{ inputs.cli-version }}
     - shell: bash
       run: node $GITHUB_ACTION_PATH/lib/main/index.js
       id: main
       env:
         INPUT_INPUT: ${{ inputs.input }}
-        INPUT_VIVLIOSTYLE-VERSION: ${{ inputs.vivliostyle-version }}
+        INPUT_CLI-VERSION: ${{ inputs.cli-version }}
     - uses: actions/upload-artifact@v3
       id: upload
       with:

@@ -31,7 +31,7 @@ jobs:
       - uses: vivliostyle/action@v1
         with:
           input: vivliostyle.config.js
-          vivliostyle-version: 5
+          cli-version: 5
           artifact-name: artifact-markdown
           if-no-files-found: error
 ```
@@ -41,7 +41,7 @@ jobs:
 | Name | Description | Default |
 |---|---|---|
 | `input` | An input file or location of Vivliostyle config file. | `.` (Looks vivliostyle.config.js in root directory automatically) |
-| `vivliostyle-version` | Using version of Vivliostyle CLI. | `latest` |
+| `cli-version` | Using version of Vivliostyle CLI. | `latest` |
 | `artifact-name` | Artifact name to upload built files. | `vivliostyle-artifact` |
 | `if-no-files-found` | The desired behavior if no files are found to upload artifacts. (Available Options: `warn` `error` `ignore`) | `warn` |
 | `retention-days` | Duration after which artifact will expire in days. 0 means using default retention. Minimum 1 day. Maximum 90 days unless changed from the repository settings page. | - |

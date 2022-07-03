@@ -3378,7 +3378,7 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 function setup() {
     return __awaiter(this, void 0, void 0, function* () {
-        const version = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('vivliostyle-version');
+        const version = _actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput('cli-version');
         yield (0,_actions_exec__WEBPACK_IMPORTED_MODULE_1__.exec)('docker', ['pull', `ghcr.io/vivliostyle/cli:${version}`]);
     });
 }

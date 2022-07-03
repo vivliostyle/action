@@ -5,7 +5,7 @@ name: Vivliostyle prefetch-image
 description: prefetch-image
 
 inputs:
-  vivliostyle-version:
+  cli-version:
     description: A docker image tag of Vivliostyle CLI
     required: true
 runs:
