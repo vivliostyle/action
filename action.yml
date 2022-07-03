@@ -29,10 +29,10 @@ runs:
   steps:
     - shell: bash
       # Workaround of failure that patch-package fails. Remove --ignore-scripts after the patch is unnecessary.
-      # run: npm i @vivliostyle/cli@${{ inputs.cli-version }}
-      run: npm i --ignore-scripts @vivliostyle/cli@${{ inputs.cli-version }}
+      # run: npm i -g @vivliostyle/cli@${{ inputs.cli-version }}
+      run: npm i -g --ignore-scripts @vivliostyle/cli@${{ inputs.cli-version }}
     - shell: bash
-      run: node $GITHUB_ACTION_PATH/lib/main/index.js
+      run: NODE_PATH=$(npm root -g --quiet) node $GITHUB_ACTION_PATH/lib/main/index.js
       id: main
       env:
         INPUT_INPUT: ${{ inputs.input }}

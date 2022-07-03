@@ -1,8 +1,11 @@
 import * as core from '@actions/core';
-import { build } from '@vivliostyle/cli';
-import { getFullConfig } from '@vivliostyle/cli/dist/build.js';
 
 async function run() {
+  const { build } =
+    require('@vivliostyle/cli/dist/index.js') as typeof import('@vivliostyle/cli/dist/index.js');
+  const { getFullConfig } =
+    require('@vivliostyle/cli/dist/build.js') as typeof import('@vivliostyle/cli/dist/build.js');
+
   const input = core.getInput('input');
   const version = core.getInput('cli-version');
   const cliConfig = {
