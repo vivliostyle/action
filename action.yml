@@ -27,9 +27,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: ./.github/actions/prefetch-image
-      with:
-        cli-version: ${{ inputs.cli-version }}
     - shell: bash
       # Workaround of failure that patch-package fails. Remove --ignore-scripts after the patch is unnecessary.
       # run: npm i @vivliostyle/cli@${{ inputs.cli-version }}
